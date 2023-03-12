@@ -9,11 +9,10 @@ export default class FeedbackWidget extends Component {
     };
     
     handleIncrement = e=> {
+        const target = e.target.value;
         this.setState (prevState => {
-            const target = e.target.textContent;
             return {
-                [target]: prevState[target]+1,
-            };
+                [target]: prevState[target]+1};
         });
     };
 
