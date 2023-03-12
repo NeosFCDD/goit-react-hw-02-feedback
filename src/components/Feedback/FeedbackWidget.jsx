@@ -22,11 +22,11 @@ export default class FeedbackWidget extends Component {
 
           <div>
             <h2>Statistics</h2>
-            <div>
-                <span>Good: {this.state.good}</span>
-                <span>Neutral: {this.state.neutral}</span>
-                <span>Bad: {this.state.bad}</span>
-            </div>
+            <ul>
+                <li>Good: {this.state.good}</li>
+                <li>Neutral: {this.state.neutral}</li>
+                <li>Bad: {this.state.bad}</li>
+            </ul>
 
           </div>
         </div>
