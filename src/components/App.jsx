@@ -7,17 +7,17 @@ class App extends Component {
     bad: 0,
   };
   
-  handleIncrement = (e) => {
+  onLeaveFeedback = (e) => {
       const target = e.target.name;
       this.setState ((prevState) => {
-          return {
-              [target]: prevState[target] + 1 };
+          return { [target]: prevState[target] + 1 };
       });
   };
 
   countTotalFeedback = ( ) => {
     return this.state.good + this.state.neutral + this.state.bad;
   };
+
   countPositiveFeedbackPercentage = ( ) => {
     return ((this.state.good / this.countTotalFeedback()) * 100).toFixed(1);
   };
@@ -28,9 +28,9 @@ class App extends Component {
         <div>
           <h2>Please leave feedback</h2>
           <div>
-              <button type="button"  onClick={this.handleIncrement}>Good</button>
-              <button type="button"  onClick={this.handleIncrement}>Neutral</button>
-              <button type="button" onClick={this.handleIncrement}>Bad</button>
+              <button type="button"  onClick={this.onLeaveFeedback}>Good</button>
+              <button type="button"  onClick={this.onLeaveFeedback}>Neutral</button>
+              <button type="button" onClick={this.onLeaveFeedback}>Bad</button>
           </div>
         </div>
 
