@@ -11,8 +11,15 @@ class App extends Component {
       const target = e.target.name;
       this.setState ((prevState) => {
           return {
-              [target]: prevState[target]+1};
+              [target]: prevState[target] + 1 };
       });
+  };
+
+  countTotalFeedback = ( ) => {
+    return this.state.good + this.state.neutral + this.state.bad;
+  };
+  countPositiveFeedbackPercentage = ( ) => {
+    return ((this.state.good / this.countTotalFeedback()) * 100).toFixed(1);
   };
 
   render() {
