@@ -1,4 +1,9 @@
 import React, {Component} from "react";
+import { Statistics } from "components/Statistics";
+import { FeedbackOptions } from "components/FeedbackOptions";
+import { Section } from "components/Section";
+import { Notification } from "components/Notification";
+import css from "components/Feedback.module.css";
 
 class App extends Component {
   state = {
@@ -8,9 +13,9 @@ class App extends Component {
   };
   
   onLeaveFeedback = (e) => {
-      const target = e.target.name;
+      const label  = e.target.name;
       this.setState ((prevState) => {
-          return { [target]: prevState[target] + 1 };
+          return { [label]: prevState[label] + 1 };
       });
   };
 
@@ -24,25 +29,26 @@ class App extends Component {
 
   render() {
     return (
-      <div className = "wrapper">
-        <div>
-          <h2>Please leave feedback</h2>
-          <div>
-              <button type="button"  onClick={this.onLeaveFeedback}>Good</button>
-              <button type="button"  onClick={this.onLeaveFeedback}>Neutral</button>
-              <button type="button" onClick={this.onLeaveFeedback}>Bad</button>
-          </div>
-        </div>
-
-        <div>
-          <h2>Statistics</h2>
-          <ul>
-              <li>Good: {this.state.good}</li>
-              <li>Neutral: {this.state.neutral}</li>
-              <li>Bad: {this.state.bad}</li>
-          </ul>
-
-        </div>
+      <div className = {css.wrapper}>
+        <Section title="Please leave a feedback">
+          <FeedbackOptions
+            options={["good", "neutral", "bad"]}
+            onLeaveFeedback={this.onLeaveFeedback}
+          />
+        </Section>
+        <Section title="Statistics">
+          {!this.state.good && !this.state.neutral && !this.state.bad ? (
+            <Notification message="There is no feedback" />
+          ) : (
+            <Statistics
+              good={this.state.good}
+              neutral={this.state.neutral}
+              bad={this.state.bad}
+              total={this.countTotalFeedback()}
+              positivePercentage={this.countPositiveFeedbackPercentage()}
+            />
+          )}
+        </Section>
       </div>
     );
   }
